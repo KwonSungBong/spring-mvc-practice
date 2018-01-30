@@ -4,6 +4,6 @@
     <title>INDEX</title>
 </head>
 <body>
-    INDEX
+    INDEX ${test}
 </body>
 </html>
