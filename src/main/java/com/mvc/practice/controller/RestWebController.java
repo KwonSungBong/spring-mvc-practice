@@ -15,10 +15,16 @@ public class RestWebController {
     @Autowired
     private TestService testService;
 
+
     @RequestMapping
     public String rest(){
-        List<TestDomain> domainList = testService.findAll();
         return "rest";
+    }
+
+    @RequestMapping("/test")
+    public List<TestDomain> test(){
+        List<TestDomain> domainList = testService.findAll();
+        return domainList;
     }
 
 }
