@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  mysqldb2:
+    image: mysql:latest
+    ports:
+      - 3308:3306
+    volumes:
+       - ./init:/docker-entrypoint-initdb.d/:ro
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: spring_mvc
+

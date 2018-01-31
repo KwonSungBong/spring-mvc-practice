@@ -1,4 +1,4 @@
-package com.mvc.practice;
+package com.mvc.practice.controller;
 
 import com.mvc.practice.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
