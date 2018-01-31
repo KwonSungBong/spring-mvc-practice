@@ -63,3 +63,12 @@ CREATE TABLE `category_five` (
   KEY `FK_category_four` (`category_four`),
   CONSTRAINT `FK_category_four` FOREIGN KEY (`category_four`) REFERENCES `category_four` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO category_one VALUES(1, 'one_name', 'ONE', now(), now());
+INSERT INTO category_two VALUES(1, 'two_name', 'TWO', 1, now(), now());
+INSERT INTO category_three VALUES(1, 'three_name', 'THREE', 1, now(), now());
+INSERT INTO category_four VALUES(1, 'four_name', 'FOUR', 1, now(), now());
+INSERT INTO category_five VALUES(1, 'five_name', 'FIVE', 1, now(), now());
+
+
+
