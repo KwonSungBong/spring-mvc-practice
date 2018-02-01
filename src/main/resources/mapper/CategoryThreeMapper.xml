@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="categoryThreeMapper" >
+    <resultMap id="CategoryThreeResultMap" type="com.mvc.practice.domain.CategoryThree" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+    </resultMap>
+    <select id="findAll" resultMap="CategoryThreeResultMap">
+        SELECT id, name, status, created_at, modified_at FROM category_three
+    </select>
+    <select id="findOne" parameterType="hashmap" resultMap="CategoryThreeResultMap">
+        SELECT * FROM category_three WHERE id = #{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO category_three (name, status, category_two, created_at, modified_at)
+        VALUES (#{name},#{status},#{categoryTwo.id},#{createdAt},#{modifiedAt})
+    </insert>
+    <update id="update">
+        UPDATE category_three SET
+        name = #{name},
+        status = #{status},
+        created_at = #{createdAt},
+        modified_at = #{modifiedAt}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM category_three WHERE id = #{id}
+    </delete>
+</mapper>
