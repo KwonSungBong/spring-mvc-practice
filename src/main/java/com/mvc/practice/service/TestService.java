@@ -21,4 +21,20 @@ public class TestService {
         return testRepository.findAll();
     }
 
+    public TestDomain findOne(int id) {
+        return testRepository.findOne(id);
+    }
+
+    public int insert(TestDomain testDomain) {
+        return testRepository.insert(testDomain);
+    }
+
+    public int update(TestDomain testDomain) {
+        return testRepository.update(testDomain);
+    }
+
+    public int delete(int id) {
+        return testRepository.delete(id);
+    }
+
 }

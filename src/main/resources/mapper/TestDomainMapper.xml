@@ -9,4 +9,20 @@
     <select id="findAll" resultMap="BaseResultMap">
         SELECT id, name, test FROM test_domain
     </select>
+    <select id="findOne" parameterType="hashmap" resultMap="BaseResultMap">
+        SELECT * FROM test_domain WHERE id = #{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO test_domain (name,test)
+        VALUES (#{name},#{test})
+    </insert>
+    <update id="update">
+        UPDATE test_domain SET
+        name = #{name},
+        test = #{test}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM test_domain WHERE id = #{id}
+    </delete>
 </mapper>
