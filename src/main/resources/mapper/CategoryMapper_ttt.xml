@@ -1,0 +1,106 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >-->
+<!--<mapper namespace="categoryMapper2" >-->
+    <!--<resultMap id="CategoryOneResultMap" type="com.mvc.practice.domain.CategoryOne" >-->
+        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="name" property="name" jdbcType="VARCHAR" />-->
+        <!--<result column="status" property="status" jdbcType="VARCHAR" />-->
+        <!--<result column="created_at" property="createdAt" jdbcType="DATE" />-->
+        <!--<result column="modified_at" property="modifiedAt" jdbcType="DATE" />-->
+        <!--<collection column="{category_one=id}" property="categoryTwoList" javaType="java.util.ArrayList" select="findTwoList" />-->
+    <!--</resultMap>-->
+
+    <!--<resultMap id="CategoryTwoResultMap" type="com.mvc.practice.domain.CategoryTwo" >-->
+        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="name" property="name" jdbcType="VARCHAR" />-->
+        <!--<result column="status" property="status" jdbcType="VARCHAR" />-->
+        <!--<result column="created_at" property="createdAt" jdbcType="DATE" />-->
+        <!--<result column="modified_at" property="modifiedAt" jdbcType="DATE" />-->
+        <!--<association column="{id=category_one}" property="categoryOne" select="findOne" />-->
+        <!--<collection column="{category_two=id}" property="categoryThreeList" javaType="java.util.ArrayList" select="findThreeList" />-->
+    <!--</resultMap>-->
+
+    <!--<resultMap id="CategoryThreeResultMap" type="com.mvc.practice.domain.CategoryThree" >-->
+        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="name" property="name" jdbcType="VARCHAR" />-->
+        <!--<result column="status" property="status" jdbcType="VARCHAR" />-->
+        <!--<result column="created_at" property="createdAt" jdbcType="DATE" />-->
+        <!--<result column="modified_at" property="modifiedAt" jdbcType="DATE" />-->
+        <!--<association column="{id=category_two}" property="categoryTwo" select="findTwo" />-->
+        <!--<collection column="{category_three=id}" property="categoryFourList" javaType="java.util.ArrayList" select="findFourList" />-->
+    <!--</resultMap>-->
+
+    <!--<resultMap id="CategoryFourResultMap" type="com.mvc.practice.domain.CategoryFour" >-->
+        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="name" property="name" jdbcType="VARCHAR" />-->
+        <!--<result column="status" property="status" jdbcType="VARCHAR" />-->
+        <!--<result column="created_at" property="createdAt" jdbcType="DATE" />-->
+        <!--<result column="modified_at" property="modifiedAt" jdbcType="DATE" />-->
+        <!--<association column="{id=category_three}" property="categoryThree" select="findThree" />-->
+        <!--<collection column="{category_four=id}" property="categoryFiveList" javaType="java.util.ArrayList" select="findFiveList" />-->
+    <!--</resultMap>-->
+
+    <!--<resultMap id="CategoryFiveResultMap" type="com.mvc.practice.domain.CategoryFive" >-->
+        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="name" property="name" jdbcType="VARCHAR" />-->
+        <!--<result column="status" property="status" jdbcType="VARCHAR" />-->
+        <!--<result column="created_at" property="createdAt" jdbcType="DATE" />-->
+        <!--<result column="modified_at" property="modifiedAt" jdbcType="DATE" />-->
+        <!--<association column="{id=category_four}" property="categoryFour" select="findFour" />-->
+    <!--</resultMap>-->
+
+    <!--<select id="findOneList" resultMap="CategoryOneResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at'-->
+        <!--FROM category_one a-->
+    <!--</select>-->
+
+    <!--<select id="findOne" resultMap="CategoryOneResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at'-->
+        <!--FROM category_one a WHERE id = #{id}-->
+    <!--</select>-->
+
+    <!--<select id="findTwoList" resultMap="CategoryTwoResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at', a.category_one AS 'category_one'-->
+        <!--FROM category_two a-->
+    <!--</select>-->
+
+    <!--<select id="findTwo" resultMap="CategoryTwoResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at', a.category_one AS 'category_one'-->
+        <!--FROM category_two a WHERE id = #{id}-->
+    <!--</select>-->
+
+    <!--<select id="findThreeList" resultMap="CategoryThreeResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at', a.category_two AS 'category_two'-->
+        <!--FROM category_three a-->
+    <!--</select>-->
+
+    <!--<select id="findThree" resultMap="CategoryThreeResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at', a.category_two AS 'category_two'-->
+        <!--FROM category_three a WHERE id = #{id}-->
+    <!--</select>-->
+
+    <!--<select id="findFourList" resultMap="CategoryFourResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at', a.category_three AS 'category_three'-->
+        <!--FROM category_four a-->
+    <!--</select>-->
+
+    <!--<select id="findFour" resultMap="CategoryFourResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at', a.category_three AS 'category_three'-->
+        <!--FROM category_four a WHERE id = #{id}-->
+    <!--</select>-->
+
+    <!--<select id="findFiveList" resultMap="CategoryFiveResultMap">-->
+        <!--SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',-->
+        <!--a.created_at AS 'created_at', a.modified_at AS 'modified_at', a.category_four AS 'category_four'-->
+        <!--FROM category_five a WHERE id = #{id}-->
+    <!--</select>-->
+
+<!--</mapper>-->

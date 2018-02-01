@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="categoryMapper" >
+    <resultMap id="CategoryOneResultMap" type="com.mvc.practice.domain.CategoryOne" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+        <collection column="{category_one=id}" property="categoryTwoList" javaType="java.util.ArrayList" select="findTwoList" />
+    </resultMap>
+
+    <resultMap id="CategoryTwoResultMap" type="com.mvc.practice.domain.CategoryTwo" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+        <association columnPrefix="one_" property="categoryOne" resultMap="CategoryOneResultMap" />
+        <collection column="{category_two=id}" property="categoryThreeList" javaType="java.util.ArrayList" select="findThreeList" />
+    </resultMap>
+
+    <resultMap id="CategoryThreeResultMap" type="com.mvc.practice.domain.CategoryThree" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+        <association columnPrefix="two_" property="categoryTwo" resultMap="CategoryTwoResultMap" />
+        <collection column="{category_three=id}" property="categoryFourList" javaType="java.util.ArrayList" select="findFourList" />
+    </resultMap>
+
+    <resultMap id="CategoryFourResultMap" type="com.mvc.practice.domain.CategoryFour" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+        <association columnPrefix="three_" property="categoryThree" resultMap="CategoryThreeResultMap" />
+        <collection column="{category_four=id}" property="categoryFiveList" javaType="java.util.ArrayList" select="findFiveList" />
+    </resultMap>
+
+    <resultMap id="CategoryFiveResultMap" type="com.mvc.practice.domain.CategoryFive" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+        <association columnPrefix="four_" property="categoryFour" resultMap="CategoryFourResultMap" />
+    </resultMap>
+
+    <select id="findOneList" resultMap="CategoryOneResultMap">
+        SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',
+        a.created_at AS 'created_at', a.modified_at AS 'modified_at'
+        FROM category_one a
+    </select>
+
+    <select id="findTwoList" resultMap="CategoryTwoResultMap">
+        SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',
+        a.created_at AS 'created_at', a.modified_at AS 'modified_at',
+        b.id AS 'one_id', b.name AS 'one_name', b.status AS 'one_status',
+        b.created_at AS 'one_created_at', b.modified_at AS 'one_modified_at'
+        FROM category_two a
+        LEFT JOIN category_one b on a.category_one = b.id
+        <if test='category_one != null and category_one > 0'>
+            WHERE category_one = #{category_one}
+        </if>
+    </select>
+
+    <select id="findThreeList" resultMap="CategoryThreeResultMap">
+        SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',
+                a.created_at AS 'created_at', a.modified_at AS 'modified_at',
+                b.id AS 'two_id', b.name AS 'two_name', b.status AS 'two_status',
+                b.created_at AS 'two_created_at', b.modified_at AS 'two_modified_at'
+        FROM category_three a
+        LEFT JOIN category_two b on a.category_two = b.id
+        <if test='category_two != null and category_two > 0'>
+            WHERE category_two = #{category_two}
+        </if>
+    </select>
+
+    <select id="findFourList" resultMap="CategoryFourResultMap">
+        SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',
+        a.created_at AS 'created_at', a.modified_at AS 'modified_at',
+        b.id AS 'three_id', b.name AS 'three_name', b.status AS 'three_status',
+        b.created_at AS 'three_created_at', b.modified_at AS 'three_modified_at'
+        FROM category_four a
+        LEFT JOIN category_three b on a.category_three = b.id
+        <if test='category_three != null and category_three > 0'>
+            WHERE category_three = #{category_three}
+        </if>
+    </select>
+
+    <select id="findFiveList" resultMap="CategoryFiveResultMap">
+        SELECT  a.id AS 'id', a.name AS 'name', a.status AS 'status',
+        a.created_at AS 'created_at', a.modified_at AS 'modified_at',
+        b.id AS 'four_id', b.name AS 'four_name', b.status AS 'four_status',
+        b.created_at AS 'four_created_at', b.modified_at AS 'four_modified_at'
+        FROM category_five a
+        LEFT JOIN category_four b on a.category_four = b.id
+        <if test='category_four != null and category_four > 0'>
+            WHERE category_four = #{category_four}
+        </if>
+    </select>
+
+</mapper>
