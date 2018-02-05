@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="segmentMapper" >
+    <resultMap id="BaseResultMap" type="com.mvc.practice.domain.Segment" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="configuration" property="configuration" jdbcType="VARCHAR" />
+        <result column="last_result_uri" property="lastResultUri" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="is_deployed" property="isDeployed" jdbcType="TINYINT" />
+        <result column="intermediate_result_uri" property="intermediateResultUri" jdbcType="VARCHAR" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+    </resultMap>
+    <select id="findAll" parameterType="int" resultMap="BaseResultMap">
+        SELECT id, name, configuration, last_result_uri, description, is_deployed, intermediate_result_uri, created_at, modified_at
+        FROM segment
+    </select>
+    <select id="findOne" resultMap="BaseResultMap">
+        SELECT id, name, configuration, last_result_uri, description, is_deployed, intermediate_result_uri, created_at, modified_at
+        FROM segment
+        WHERE id = #{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO segment (name, configuration, last_result_uri, description, is_deployed, intermediate_result_uri, created_at, modified_at)
+        VALUES (#{name},#{configuration},#{lastResultUri},#{description},#{isDeployed},#{intermediateResultUri},now(),now())
+    </insert>
+    <update id="update">
+        UPDATE segment SET
+        name = #{name},
+        modified_at = now()
+        WHERE id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM segment WHERE id = #{id}
+    </delete>
+</mapper>

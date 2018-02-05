@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="advertisementMapper" >
+    <resultMap id="BaseResultMap" type="com.mvc.practice.domain.Advertisement" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="target_impression_cnt" property="targetImpressionCnt" jdbcType="INTEGER" />
+        <result column="required_device_count" property="requiredDeviceCount" jdbcType="INTEGER" />
+        <result column="assign_ratio" property="assignRatio" jdbcType="FLOAT" />
+        <result column="priority" property="priority" jdbcType="INTEGER" />
+        <result column="view_sequence" property="viewSequence" jdbcType="INTEGER" />
+        <result column="media_mix" property="mediaMix" jdbcType="INTEGER" />
+        <result column="min_freq" property="minFreq" jdbcType="INTEGER" />
+        <result column="max_freq" property="maxFreq" jdbcType="INTEGER" />
+        <result column="device_expired_days" property="deviceExpiredDays" jdbcType="INTEGER" />
+        <result column="fixed_slot" property="fixedSlot" jdbcType="INTEGER" />
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+        <result column="start_at" property="startAt" jdbcType="DATE" />
+        <result column="end_at" property="endAt" jdbcType="DATE" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+    </resultMap>
+    <select id="findAll" parameterType="int" resultMap="BaseResultMap">
+        SELECT id, title, description, target_impression_cnt, required_device_count, assign_ratio, priority,
+        view_sequence, media_mix, min_freq, max_freq, device_expired_days, fixed_slot, is_deleted,
+        start_at, end_at, created_at, modified_at
+        FROM advertisement
+    </select>
+    <select id="findOne" resultMap="BaseResultMap">
+        SELECT id, title, description, target_impression_cnt, required_device_count, assign_ratio, priority,
+        view_sequence, media_mix, min_freq, max_freq, device_expired_days, fixed_slot, is_deleted,
+        start_at, end_at, created_at, modified_at
+        FROM advertisement
+        WHERE id = #{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO advertisement (campaign, title, description, target_impression_cnt, required_device_count, assign_ratio, priority,
+        view_sequence, media_mix, min_freq, max_freq, device_expired_days, fixed_slot, is_deleted,
+        start_at, end_at, created_at, modified_at)
+        VALUES (#{campaign.id}, #{title}, #{description}, #{targetImpressionCnt}, #{requiredDeviceCount}, #{assignRatio}, #{priority},
+        #{viewSequence}, #{mediaMix}, #{minFreq}, #{maxFreq}, #{deviceExpiredDays}, #{fixedSlot}, #{isDeleted},
+        now(), now(), now(), now())
+    </insert>
+    <update id="update">
+        UPDATE advertisement SET
+        title = #{title},
+        modified_at = now()
+        WHERE id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM advertisement WHERE id = #{id}
+    </delete>
+</mapper>

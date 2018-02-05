@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="advertisementSegmentMapper" >
+    <resultMap id="AdvertisementResultMap" type="com.mvc.practice.domain.Advertisement" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="target_impression_cnt" property="targetImpressionCnt" jdbcType="INTEGER" />
+        <result column="required_device_count" property="requiredDeviceCount" jdbcType="INTEGER" />
+        <result column="assign_ratio" property="assignRatio" jdbcType="FLOAT" />
+        <result column="priority" property="priority" jdbcType="INTEGER" />
+        <result column="view_sequence" property="viewSequence" jdbcType="INTEGER" />
+        <result column="media_mix" property="mediaMix" jdbcType="INTEGER" />
+        <result column="min_freq" property="minFreq" jdbcType="INTEGER" />
+        <result column="max_freq" property="maxFreq" jdbcType="INTEGER" />
+        <result column="device_expired_days" property="deviceExpiredDays" jdbcType="INTEGER" />
+        <result column="fixed_slot" property="fixedSlot" jdbcType="INTEGER" />
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+        <result column="start_at" property="startAt" jdbcType="DATE" />
+        <result column="end_at" property="endAt" jdbcType="DATE" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+    </resultMap>
+    <resultMap id="SegmentResultMap" type="com.mvc.practice.domain.Segment" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="configuration" property="configuration" jdbcType="VARCHAR" />
+        <result column="last_result_uri" property="lastResultUri" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="is_deployed" property="isDeployed" jdbcType="TINYINT" />
+        <result column="intermediate_result_uri" property="intermediateResultUri" jdbcType="VARCHAR" />
+        <result column="created_at" property="createdAt" jdbcType="DATE" />
+        <result column="modified_at" property="modifiedAt" jdbcType="DATE" />
+    </resultMap>
+    <resultMap id="BaseResultMap" type="com.mvc.practice.domain.AdvertisementSegment" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <association columnPrefix="advertisement_" property="advertisement" resultMap="AdvertisementResultMap" />
+        <association columnPrefix="segment_" property="segment" resultMap="SegmentResultMap" />
+    </resultMap>
+    <select id="findAll" parameterType="int" resultMap="BaseResultMap">
+        SELECT a.id ID,
+        b.id 'advertisement_id', b.title 'advertisement_title', b.description 'advertisement_description', b.target_impression_cnt 'advertisement_target_impression_cnt',
+        b.required_device_count 'advertisement_required_device_count', b.assign_ratio 'advertisement_assign_ratio', b.priority 'advertisement_priority',
+        b.view_sequence 'advertisement_view_sequence', b.media_mix 'advertisement_media_mix', b.min_freq 'advertisement_min_freq', b.max_freq 'advertisement_max_freq',
+        b.device_expired_days 'advertisement_device_expired_days', b.fixed_slot 'advertisement_fixed_slot', b.is_deleted 'advertisement_is_deleted',
+        b.start_at 'advertisement_start_at', b.end_at 'advertisement_end_at', b.created_at 'advertisement_created_at', b.modified_at 'advertisement_modified_at',
+        c.id 'segment_id', c.name 'segment_name', c.configuration 'segment_configuration', c.last_result_uri 'segment_last_result_uri', c.description 'segment_description',
+        c.is_deployed 'segment_is_deployed', c.intermediate_result_uri 'segment_intermediate_result_uri', c.created_at  'segment_created_at', c.modified_at  'segment_modified_at'
+        FROM advertisement_segment a
+        JOIN advertisement b
+        ON a.advertisement=b.id
+        JOIN segment c
+        ON a.segment = c.id
+    </select>
+    <select id="findOne" resultMap="BaseResultMap">
+        SELECT a.id ID,
+        b.id 'advertisement_id', b.title 'advertisement_title', b.description 'advertisement_description', b.target_impression_cnt 'advertisement_target_impression_cnt',
+        b.required_device_count 'advertisement_required_device_count', b.assign_ratio 'advertisement_assign_ratio', b.priority 'advertisement_priority',
+        b.view_sequence 'advertisement_view_sequence', b.media_mix 'advertisement_media_mix', b.min_freq 'advertisement_min_freq', b.max_freq 'advertisement_max_freq',
+        b.device_expired_days 'advertisement_device_expired_days', b.fixed_slot 'advertisement_fixed_slot', b.is_deleted 'advertisement_is_deleted',
+        b.start_at 'advertisement_start_at', b.end_at 'advertisement_end_at', b.created_at 'advertisement_created_at', b.modified_at 'advertisement_modified_at',
+        c.id 'segment_id', c.name 'segment_name', c.configuration 'segment_configuration', c.last_result_uri 'segment_last_result_uri', c.description 'segment_description',
+        c.is_deployed 'segment_is_deployed', c.intermediate_result_uri 'segment_intermediate_result_uri', c.created_at  'segment_created_at', c.modified_at  'segment_modified_at'
+        FROM advertisement_segment a
+        JOIN advertisement b
+        ON a.advertisement=b.id
+        JOIN segment c
+        ON a.segment = c.id
+        WHERE a.id = #{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO advertisement_segment (advertisement, segment)
+        VALUES (#{advertisement.id}, #{segment.id})
+    </insert>
+    <update id="update">
+        UPDATE advertisement_segment SET
+        advertisement = #{advertisement.id},
+        segment = #{segment.id}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM advertisement_segment WHERE id = #{id}
+    </delete>
+</mapper>

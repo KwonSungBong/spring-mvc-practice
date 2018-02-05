@@ -18,12 +18,12 @@ public class Advertisement {
 	private int priority;
 	private int viewSequence;
 
+	private long mediaMix;
 	private long minFreq;
 	private long maxFreq;
 	private int deviceExpiredDays;
 	private int fixedSlot;
 	private Boolean isDeleted;
-	private Long deviceCount;
 
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date startAt;
@@ -44,6 +44,14 @@ public class Advertisement {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getMediaMix() {
+		return mediaMix;
+	}
+
+	public void setMediaMix(long mediaMix) {
+		this.mediaMix = mediaMix;
 	}
 
 	public int getViewSequence() {
@@ -134,20 +142,12 @@ public class Advertisement {
 		this.fixedSlot = fixedSlot;
 	}
 
-	public Boolean getDeleted() {
+	public Boolean getIsDeleted() {
 		return isDeleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setIsDeleted(Boolean deleted) {
 		isDeleted = deleted;
-	}
-
-	public Long getDeviceCount() {
-		return deviceCount;
-	}
-
-	public void setDeviceCount(Long deviceCount) {
-		this.deviceCount = deviceCount;
 	}
 
 	public Date getStartAt() {

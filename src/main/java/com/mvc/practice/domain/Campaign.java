@@ -90,11 +90,11 @@ public class Campaign {
         this.description = description;
     }
 
-    public Boolean getExclusiveInternalAd() {
+    public Boolean getIsExclusiveInternalAd() {
         return isExclusiveInternalAd;
     }
 
-    public void setExclusiveInternalAd(Boolean exclusiveInternalAd) {
+    public void setIsExclusiveInternalAd(Boolean exclusiveInternalAd) {
         isExclusiveInternalAd = exclusiveInternalAd;
     }
 

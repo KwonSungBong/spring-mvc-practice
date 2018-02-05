@@ -60,11 +60,11 @@ public class Segment {
         this.description = description;
     }
 
-    public boolean isDeployed() {
+    public boolean getIsDeployed() {
         return isDeployed;
     }
 
-    public void setDeployed(boolean deployed) {
+    public void setIsDeployed(boolean deployed) {
         isDeployed = deployed;
     }
 
